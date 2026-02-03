@@ -3,6 +3,7 @@ import { LayoutDashboard, FileText, Stamp, Settings, ChevronLeft, ChevronRight, 
 import { useState } from 'react';
 import { cn } from '../../lib/utils';
 import { useProject } from '../../context/ProjectContext';
+import logo from '../../assets/logo.svg';
 
 const MENU_ITEMS = [
     { icon: LayoutDashboard, label: 'Dashboard', id: 'dashboard' },
@@ -39,7 +40,7 @@ export function Sidebar({ activeView, onNavigate }: SidebarProps) {
                     >
                         {/* New Logo */}
                         <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg shadow-blue-900/20">
-                            <img src="/src/assets/logo.svg" alt="GED Pro Logo" className="w-full h-full object-cover" />
+                            <img src={logo} alt="GED Pro Logo" className="w-full h-full object-cover" />
                         </div>
 
                         <div className="flex flex-col">
