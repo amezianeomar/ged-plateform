@@ -1,14 +1,12 @@
 import { motion } from 'framer-motion';
-import { Eye, FileText } from 'lucide-react';
 import { StatusPill } from './StatusPill';
 import type { Document } from '../../data/mock';
 
 interface VisaTableProps {
     documents: Document[];
-    onViewDetail: (doc: Document) => void;
 }
 
-export function VisaTable({ documents }: { documents: Document[]; onViewDetail?: (doc: Document) => void }) {
+export function VisaTable({ documents }: VisaTableProps) {
     return (
         <div className="bg-white dark:bg-slate-900/50 backdrop-blur-md rounded-2xl border border-slate-200 dark:border-slate-700/50 shadow-sm overflow-hidden">
             <div className="overflow-x-auto">

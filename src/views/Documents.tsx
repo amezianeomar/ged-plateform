@@ -33,7 +33,7 @@ export function Documents() {
             </div>
 
             {/* Main Content */}
-            <VisaTable documents={MOCK_DOCUMENTS} onViewDetail={setSelectedDoc} />
+            <VisaTable documents={MOCK_DOCUMENTS} />
 
             {/* Detail Modal */}
             <DetailSheet
