@@ -1,4 +1,9 @@
-import { FileText, Clock, CheckCircle, XCircle } from 'lucide-react';
+export interface VisaMatrix {
+    oj_control?: 'VSO' | 'VAO' | 'REF' | 'VPI' | 'PENDING' | 'NC';
+    lak?: 'VSO' | 'VAO' | 'REF' | 'VPI' | 'PENDING' | 'NC';
+    carbo3s?: 'VSO' | 'VAO' | 'REF' | 'VPI' | 'PENDING' | 'NC';
+    joule?: 'VSO' | 'VAO' | 'REF' | 'VPI' | 'PENDING' | 'NC';
+}
 
 export interface Document {
     id: string;
@@ -7,20 +12,118 @@ export interface Document {
     lot: string;
     indice: string;
     date: string;
-    status: 'VSO' | 'VAO' | 'REF' | 'PENDING';
+    visas: VisaMatrix;
+    link: string; // Added for completeness, useful for the 'Name' link
 }
 
 export const MOCK_DOCUMENTS: Document[] = [
-    { id: '1', ref: 'GC-PL-001', title: 'Plan Coffrage RDC - Bloc A', lot: 'Gros Œuvre', indice: 'A', date: '2023-10-24', status: 'VSO' },
-    { id: '2', ref: 'GC-PL-002', title: 'Plan Ferraillage Poteaux', lot: 'Gros Œuvre', indice: 'B', date: '2023-10-25', status: 'VAO' },
-    { id: '3', ref: 'ARCH-EL-005', title: 'Élévation Façade Nord', lot: 'Architecture', indice: '0', date: '2023-10-26', status: 'PENDING' },
-    { id: '4', ref: 'CVC-PL-102', title: 'Réseau Ventilation R+1', lot: 'CVC', indice: 'A', date: '2023-10-27', status: 'REF' },
-    { id: '5', ref: 'ELEC-SH-011', title: 'Schéma Unifilaire TGBT', lot: 'Électricité', indice: 'C', date: '2023-10-28', status: 'VSO' },
-    { id: '6', ref: 'GC-PL-003', title: 'Plan Coffrage R+1 - Bloc A', lot: 'Gros Œuvre', indice: 'A', date: '2023-10-29', status: 'PENDING' },
-    { id: '7', ref: 'PLMB-RES-004', title: 'Réseau Evacuation EU/EV', lot: 'Plomberie', indice: 'B', date: '2023-10-30', status: 'VSO' },
-    { id: '8', ref: 'VRD-VOI-001', title: 'Plan Voirie et Réseaux', lot: 'VRD', indice: '0', date: '2023-10-31', status: 'VAO' },
-    { id: '9', ref: 'MEN-DET-009', title: 'Détails Menuiserie Ext', lot: 'Menuiserie', indice: 'A', date: '2023-11-01', status: 'PENDING' },
-    { id: '10', ref: 'GC-DET-022', title: 'Coupe sur Voile V2', lot: 'Gros Œuvre', indice: 'B', date: '2023-11-02', status: 'VSO' },
+    {
+        id: "1",
+        ref: "RSEB-G3C-EXE-MTE",
+        title: "Methodologie MDS",
+        lot: "Lot 01",
+        indice: "C",
+        date: "03/10/2024",
+        link: "#",
+        visas: {
+            oj_control: "VAO",
+            lak: "PENDING",
+            carbo3s: "REF",
+            joule: "NC"
+        }
+    },
+    {
+        id: "2",
+        ref: "RSEB-G3C-SPTS-NDC",
+        title: "Note de Calcul Tour",
+        lot: "Lot 01",
+        indice: "5",
+        date: "16/10/2024",
+        link: "#",
+        visas: {
+            oj_control: "VSO",
+            lak: "VSO",
+            carbo3s: "VSO",
+            joule: "VPI"
+        }
+    },
+    {
+        id: "3",
+        ref: "RSEB-G3C-SPTS-EXE-SONDAGE-S100",
+        title: "RAPPORT PHOTOGRAPHIQUE DES SONDAGES",
+        lot: "Lot 01",
+        indice: "0",
+        date: "03/10/2024",
+        link: "#",
+        visas: {
+            oj_control: "VPI",
+            carbo3s: "VPI"
+        }
+    },
+    {
+        id: "4",
+        ref: "RSEB-G3C-EXE-STR-PLN-MDS-D-1000",
+        title: "PLAN EXE MDS",
+        lot: "Lot 01",
+        indice: "D",
+        date: "10/10/2024",
+        link: "#",
+        visas: {
+            oj_control: "VAO",
+            carbo3s: "REF"
+        }
+    },
+    {
+        id: "5",
+        ref: "RSEB-G3C-SPTS-NDC-MDS-01",
+        title: "NDC MDS",
+        lot: "Lot 01",
+        indice: "4",
+        date: "10/10/2024",
+        link: "#",
+        visas: {
+            oj_control: "VAO"
+        }
+    },
+    {
+        id: "6",
+        ref: "RSEB-G3C-SPTS-EXE-STR-PLN-BATIMENT",
+        title: "PLAN EXE NOUVEAU BATIMENT RDC",
+        lot: "Lot 01",
+        indice: "A",
+        date: "10/10/2024",
+        link: "#",
+        visas: {
+            oj_control: "VSO",
+            carbo3s: "VAO"
+        }
+    },
+    {
+        id: "7",
+        ref: "RSEB-G3C-SPTS-EXE-STR-PLN-POUTRE",
+        title: "DETAIL POUTRE NOUVEAU BATIMENT",
+        lot: "Lot 01",
+        indice: "0",
+        date: "10/10/2024",
+        link: "#",
+        visas: {
+            oj_control: "VSO",
+            carbo3s: "VAO"
+        }
+    },
+    {
+        id: "8",
+        ref: "Dossier technique d’étancheité BERCHET",
+        title: "CAHIER DE CHARGE ETANCHEITE",
+        lot: "Lot 01",
+        indice: "1",
+        date: "18/10/2024",
+        link: "#",
+        visas: {
+            oj_control: "REF",
+            carbo3s: "VAO"
+        }
+    },
 ];
 
 export const MOCK_USER = {

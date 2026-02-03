@@ -1,4 +1,4 @@
-# GED Pro - Engineering Document Control Platform
+# GED Pro - Civil Engineering Visa Matrix Platform
 
 ![Version](https://img.shields.io/badge/version-1.0.0--beta-blue.svg)
 ![Status](https://img.shields.io/badge/status-development-orange)
@@ -6,7 +6,7 @@
 
 ## 🏗 Project Overview
 
-**GED Pro** is a specialized SaaS platform designed for Civil Engineering project management. It streamlines the lifecycle of technical documents, from submission to approval ("Visa" workflow), ensuring strict version control and role-based access security.
+**GED Pro** is a specialized SaaS platform designed for high-stakes Civil Engineering projects. Unlike standard document storage, GED Pro implements a **Multi-Stakeholder Approval Matrix**, allowing distinct entities (Control Office, Architects, Client) to review the same document simultaneously with independent status tracking.
 
 **Client:** Project Management Office (Civil Engineering)
 **Lead Architect:** Omar Ameziane
@@ -15,75 +15,46 @@
 
 ## 🚀 Key Features
 
-* **Centralized Dashboard:** Real-time analytics of project advancement and visa status distribution.
-* **Visa Workflow Engine:** State-machine logic handling `PENDING` $\to$ `VSO` (Validé) / `VAO` (Validé avec réserves) / `REF` (Refusé).
-* **Revision Control:** Automatic management of document indices (0, A, B) with superseded version locking.
-* **Role-Based Access (RBAC):** Strict separation of concerns between Admin, Control Office, and Contractors via Row Level Security (RLS).
+* **The Visa Matrix:** A pivot-table interface where rows represent documents and columns represent dynamic stakeholders (OJ Control, LAK, Carbo3S, etc.).
+* **Conflict Detection:** Instantly visualizes if one stakeholder has Approved (`VSO`) a document while another has Rejected (`REF`) it.
+* **Strict Versioning:** Enforces `Index 0` $\to$ `Index A` workflow logic.
+* **RBAC Security:** A Contractor can see their row, but cannot modify the "OJ Control" cell.
 
 ---
 
-## 🛠 Tech Stack
+## 🛠 Architecture & Logic
 
-### Frontend
-* **Framework:** React 18 (Vite)
-* **Styling:** Tailwind CSS v3 + Shadcn/UI (Radix Primitives)
-* **Animations:** Framer Motion (Orchestrated entrance/exit animations)
-* **Icons:** Lucide React
+### The "Matrix" Data Problem
+Standard databases cannot easily store "Columns" that change per project. We solved this using a **Normalized Relational Schema** transformed via a **Frontend Pivot Algorithm**.
 
-### Backend & Infrastructure
-* **Database:** PostgreSQL (via Supabase)
-* **Auth:** Supabase Auth (JWT)
-* **Storage:** S3-compatible Blob Storage (for PDF/DWG files)
-* **Security:** Database-level RLS policies.
+1.  **Database (Normalized):**
+    * `Documents` table (1 row per file).
+    * `Stakeholders` table (Definitions of OJ Control, LAK...).
+    * `Reviews` table (Junction: Document ID + Stakeholder ID + Status).
+
+2.  **Frontend (React/Vite):**
+    * Fetches linear data.
+    * Transforms it into a Matrix object: `{ doc_id: 1, visas: { oj: 'VSO', lak: 'REF' } }`.
+    * Renders dynamically using Tailwind Grid.
 
 ---
 
-## ⚡️ Getting Started
+## ⚡️ Quick Start
 
-### Prerequisites
-* Node.js 18+
-* npm or pnpm
-
-### Installation
-
-1.  **Clone the repository**
+1.  **Clone & Install**
     ```bash
-    git clone [https://github.com/your-username/ged-platform.git](https://github.com/your-username/ged-platform.git)
-    cd ged-platform
-    ```
-
-2.  **Install dependencies**
-    ```bash
+    git clone [https://github.com/your-repo/ged-pro.git](https://github.com/your-repo/ged-pro.git)
     npm install
     ```
 
-3.  **Environment Setup**
-    Create a `.env.local` file in the root:
-    ```env
-    VITE_SUPABASE_URL=your_project_url
-    VITE_SUPABASE_ANON_KEY=your_anon_key
-    ```
+2.  **Setup Environment**
+    Create `.env.local` with your Supabase credentials.
 
-4.  **Run Locally**
+3.  **Run Development**
     ```bash
     npm run dev
     ```
 
 ---
 
-## 📅 Roadmap
-
-- [x] **Phase 1: Architecture & UI Shell** (Completed)
-    - Static implementation of Dashboard and Data Grids.
-    - Responsive Design & Dark Mode.
-- [ ] **Phase 2: Backend Integration** (Current)
-    - Supabase Client connection.
-    - Real-time data fetching.
-- [ ] **Phase 3: Visa Logic Implementation**
-    - State mutation (Approval/Rejection logic).
-    - File Upload handling.
-- [ ] **Phase 4: Production Deployment**
-
----
-
-*© 2026 Omar Ameziane. All Rights Reserved.*
+*© 2026 Omar Ameziane. Built for Precision.*
