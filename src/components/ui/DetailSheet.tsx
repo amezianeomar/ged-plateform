@@ -3,7 +3,6 @@ import { Dialog, Transition } from '@headlessui/react';
 import { X, FileText } from 'lucide-react';
 import { MOCK_USER } from '../../data/mock';
 import type { Document } from '../../data/mock';
-import { StatusPill } from './StatusPill';
 
 interface DetailSheetProps {
     isOpen: boolean;
@@ -66,11 +65,11 @@ export function DetailSheet({ isOpen, onClose, document }: DetailSheetProps) {
                                         {/* Content */}
                                         <div className="relative mt-6 flex-1 px-6 sm:px-6 overflow-y-auto">
 
-                                            {/* Status Section */}
+                                            {/* Status Section - Matrix Summary or General Info */}
                                             <div className="mb-8">
-                                                <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Statut Actuel</h4>
+                                                <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Détails de soumission</h4>
                                                 <div className="flex items-center justify-between bg-slate-50 dark:bg-slate-800/80 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
-                                                    <StatusPill status={document.status} />
+                                                    <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Soumis le</span>
                                                     <span className="text-sm text-slate-500 dark:text-slate-400">{document.date}</span>
                                                 </div>
                                             </div>

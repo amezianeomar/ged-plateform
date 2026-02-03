@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { TrendingUp, TrendingDown, Clock, CheckCircle, XCircle, FileText } from 'lucide-react';
+import { Clock, CheckCircle, XCircle, FileText } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 interface StatCardProps {
@@ -17,7 +17,7 @@ export function StatCard({ label, value, trend = 'neutral', delay = 0 }: StatCar
     const isError = trend === 'down'; // Using 'down' for Refused
 
     // Status color configurations
-    const statusColor = isWarning ? 'text-orange-500' : isSuccess ? 'text-emerald-500' : isError ? 'text-rose-500' : 'text-slate-100';
+    // const statusColor = isWarning ? 'text-orange-500' : isSuccess ? 'text-emerald-500' : isError ? 'text-rose-500' : 'text-slate-100'; // Unused
     const glowColor = isWarning ? 'shadow-orange-500/20' : isSuccess ? 'shadow-emerald-500/20' : isError ? 'shadow-rose-500/20' : 'shadow-blue-500/10';
     const borderColor = isWarning ? 'border-orange-500/30' : isSuccess ? 'border-emerald-500/30' : isError ? 'border-rose-500/30' : 'border-slate-700';
 

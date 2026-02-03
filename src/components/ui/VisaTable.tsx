@@ -8,7 +8,7 @@ interface VisaTableProps {
     onViewDetail: (doc: Document) => void;
 }
 
-export function VisaTable({ documents, onViewDetail }: VisaTableProps) {
+export function VisaTable({ documents }: { documents: Document[]; onViewDetail?: (doc: Document) => void }) {
     return (
         <div className="bg-white dark:bg-slate-900/50 backdrop-blur-md rounded-2xl border border-slate-200 dark:border-slate-700/50 shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
