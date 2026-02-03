@@ -1,73 +1,89 @@
-# React + TypeScript + Vite
+# GED Pro - Engineering Document Control Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Version](https://img.shields.io/badge/version-1.0.0--beta-blue.svg)
+![Status](https://img.shields.io/badge/status-development-orange)
+![Stack](https://img.shields.io/badge/stack-React%20%7C%20Supabase%20%7C%20Tailwind-0f172a)
 
-Currently, two official plugins are available:
+## 🏗 Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**GED Pro** is a specialized SaaS platform designed for Civil Engineering project management. It streamlines the lifecycle of technical documents, from submission to approval ("Visa" workflow), ensuring strict version control and role-based access security.
 
-## React Compiler
+**Client:** Project Management Office (Civil Engineering)
+**Lead Architect:** Omar Ameziane
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🚀 Key Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* **Centralized Dashboard:** Real-time analytics of project advancement and visa status distribution.
+* **Visa Workflow Engine:** State-machine logic handling `PENDING` $\to$ `VSO` (Validé) / `VAO` (Validé avec réserves) / `REF` (Refusé).
+* **Revision Control:** Automatic management of document indices (0, A, B) with superseded version locking.
+* **Role-Based Access (RBAC):** Strict separation of concerns between Admin, Control Office, and Contractors via Row Level Security (RLS).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠 Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Frontend
+* **Framework:** React 18 (Vite)
+* **Styling:** Tailwind CSS v3 + Shadcn/UI (Radix Primitives)
+* **Animations:** Framer Motion (Orchestrated entrance/exit animations)
+* **Icons:** Lucide React
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Backend & Infrastructure
+* **Database:** PostgreSQL (via Supabase)
+* **Auth:** Supabase Auth (JWT)
+* **Storage:** S3-compatible Blob Storage (for PDF/DWG files)
+* **Security:** Database-level RLS policies.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ⚡️ Getting Started
+
+### Prerequisites
+* Node.js 18+
+* npm or pnpm
+
+### Installation
+
+1.  **Clone the repository**
+    ```bash
+    git clone [https://github.com/your-username/ged-platform.git](https://github.com/your-username/ged-platform.git)
+    cd ged-platform
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Environment Setup**
+    Create a `.env.local` file in the root:
+    ```env
+    VITE_SUPABASE_URL=your_project_url
+    VITE_SUPABASE_ANON_KEY=your_anon_key
+    ```
+
+4.  **Run Locally**
+    ```bash
+    npm run dev
+    ```
+
+---
+
+## 📅 Roadmap
+
+- [x] **Phase 1: Architecture & UI Shell** (Completed)
+    - Static implementation of Dashboard and Data Grids.
+    - Responsive Design & Dark Mode.
+- [ ] **Phase 2: Backend Integration** (Current)
+    - Supabase Client connection.
+    - Real-time data fetching.
+- [ ] **Phase 3: Visa Logic Implementation**
+    - State mutation (Approval/Rejection logic).
+    - File Upload handling.
+- [ ] **Phase 4: Production Deployment**
+
+---
+
+*© 2026 Omar Ameziane. All Rights Reserved.*
